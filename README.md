@@ -1,1 +1,1 @@
-# geometry_transformer_repr
+# The geometry of hidden representations of large transformer models
