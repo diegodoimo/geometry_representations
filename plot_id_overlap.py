@@ -122,6 +122,7 @@ if args.plot_id:
     ax.set_ylabel('ID', fontsize = 13)
     ax.set_xlabel('relative depth', fontsize = 12)
     ax.set_title('Intrinsic dimension')
+    plt.tight_layout()
     plt.savefig('./results/intrinsic_dimension.png', dpi = 150)
 
 
@@ -147,6 +148,7 @@ if args.plot_overlap:
     ax.set_ylabel('$\chi^{l, gt}$', fontsize = 14)
     ax.set_xlabel('relative depth', fontsize = 12)
     ax.set_title('Neighborhood consistency w.r.t classification labels')
+    plt.tight_layout()
     plt.savefig('./results/overlap_ground_truth.png', dpi = 150)
 
 
