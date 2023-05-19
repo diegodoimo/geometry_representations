@@ -47,10 +47,10 @@ python plot_id_overlap.py --plot_overlap
 
 If you'd like to compute yourself the distance matrix of other hidden representations of the ImageNet dataset:
 
-* ### Download the i-gpt pretrained models following the instructions at https://github.com/openai/image-gpt 
+   * #### Download the i-gpt pretrained models following the instructions at https://github.com/openai/image-gpt 
 
 
- * ### Compute the nearest neighbor matrix of an hidden layer representation:
+   * #### Compute the nearest neighbor matrix of an hidden layer representation:
 
     To compute the nearest neighnor matrix you need to have the pretrained model weights stored in "model_folder" and the ImageNet dataset stored in "imagenet_folder". 
 
