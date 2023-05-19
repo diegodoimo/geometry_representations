@@ -52,9 +52,9 @@ If you'd like to compute yourself the distance matrix of other hidden representa
 
    * #### Compute the nearest neighbor matrix of an hidden layer representation:
 
-    To compute the nearest neighnor matrix you need to have the pretrained model weights stored in "model_folder" and the ImageNet dataset stored in "imagenet_folder". 
+   To compute the nearest neighnor matrix you need to have the pretrained model weights stored in "model_folder" and the ImageNet dataset stored in "imagenet_folder". 
 
-    The following show how to compute the distance matrix of the 16 layer representation of the iGPT small architecture on the ImageNet training set:
+   In order to compute the distance matrix of the 'layer 16' of the iGPT 'small' architecture on the ImageNet training set type:
 
     ```
     python  get_distance_matrices.py --model small --ckpt_path "model_folder" --data_path "model_folder" --trainset --hidden_repr 16
