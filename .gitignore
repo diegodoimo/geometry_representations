@@ -1,5 +1,7 @@
 results/data* 
 generate_data.py
+.DS_Store
+results/.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
