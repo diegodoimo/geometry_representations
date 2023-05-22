@@ -32,7 +32,7 @@ Once you have downloaded the numpy arrays with the ratio of distances between th
 ```
 python plot_id_overlap.py --plot_id
 ```
-![Alt text](results/intrinsic_dimension.png)
+![Alt text](results/intrinsic_dimension_image.png)
 
 
 and the overlap with the ground truth labels with:
@@ -40,7 +40,7 @@ and the overlap with the ground truth labels with:
 ```
 python plot_id_overlap.py --plot_overlap
 ```
-![Alt text](results/overlap_ground_truth.png)
+![Alt text](results/overlap_ground_truth_image.png)
 
 
 ## Compute the distance matrices 
