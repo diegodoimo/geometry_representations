@@ -56,13 +56,13 @@ Once you have downloaded the already computed IDs values and neighbor overlap va
 ```
 python plot_id_overlap.py --plot_id --dataset protein
 ```
-
+![Alt text](results/intrinsic_dimension_protein.png)
 
 ```
 python plot_id_overlap.py --plot_overlap  --dataset protein
 ```
 
-
+![Alt text](results/overlap_ground_truth_protein.png)
 
 ## Compute the distance matrices 
 ### Image
