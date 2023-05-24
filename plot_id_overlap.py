@@ -151,7 +151,45 @@ if args.plot_id:
         
         plt.tight_layout()
         plt.savefig('./results/intrinsic_dimension_image.png', dpi = 150)
+    
+    if args.dataset == 'protein':
+        ids_35M = np.load(f'{args.distance_mat_folder}/id-esm2-35M.npy')
+        ids_650M = np.load(f'{args.distance_mat_folder}/id-esm2-650M.npy')
+        ids_3B = np.load(f'{args.distance_mat_folder}/id-esm2-3B.npy')
 
+        plot(np.arange(len(ids_35M))/len(ids_35M), ids_35M, '#7AD151','ESM-2(35M)')
+        plot(np.arange(len(ids_650M))/len(ids_650M), ids_650M, (42/235, 120/235, 142/235),'ESM-2(650M)')
+        plot(np.arange(len(ids_3B))/len(ids_3B), ids_3B, '#414487','ESM-2(3B)')
+
+        leg = plt.legend(loc="lower left", 
+                mode = "expand", 
+                ncol = 3, 
+                bbox_to_anchor=(0, 1.0, 1, 0.2), 
+                fancybox=True, 
+                frameon=False,
+                fontsize="8.5", borderaxespad=0.4, labelspacing=0.5)  #9, 0.5
+
+        for legend_text in leg.get_texts():
+            legend_text.set_color("#393A3A")
+
+        plt.xlim([-0.05, 1.05])
+        plt.ylim([0, 35])
+
+        xlabel = plt.xlabel('relative depth', fontsize=12)
+        xlabel.set_color("#393A3A")
+
+        ylabel  = plt.ylabel("ID", fontsize=12)
+        ylabel.set_color("#393A3A")
+        
+        plt.xticks(fontsize=12)
+        plt.yticks(fontsize=12)
+        plt.tick_params(bottom = False, left=False)
+        plt.grid()
+        plt.gcf().set_size_inches(4.7, 4) 
+        
+        plt.tight_layout()
+        plt.savefig('./results/intrinsic_dimension_protein.png', dpi = 150)
+    
 
 
 if args.plot_overlap:
@@ -204,25 +242,44 @@ if args.plot_overlap:
 
 
     elif args.dataset == 'protein':
-        layer_dict = {'35M': np.array([0, 3, 6, 9, 12]),
-                    '650M': np.array([0, 6, 12, 18, 24, 30, 33]),
-                    '3B': np.array([0, 8, 16, 24, 30, 36])
-        }
+        ov_35M = np.load(f'{args.distance_mat_folder}/no-gt-esm2-35M.npy')
+        ov_650M = np.load(f'{args.distance_mat_folder}/no-gt-esm2-650M.npy')
+        ov_3B = np.load(f'{args.distance_mat_folder}/no-gt-esm2-3BM.npy')
 
-        # labels = np.load(f'{args.distance_mat_folder}/imagenet_train_labels.npy')
+        plot(np.arange(len(ov_35M))/len(ov_35M), ov_35M, '#7AD151','ESM-2(35M)')
+        plot(np.arange(len(ov_650M))/len(ov_650M), ov_650M, (42/235, 120/235, 142/235),'ESM-2(650M)')
+        plot(np.arange(len(ov_3B))/len(ov_3B), ov_3B, '#414487','ESM-2(3B)')
+        
 
+        leg = plt.legend(loc="lower left", 
+                mode = "expand", 
+                ncol = 3, 
+                bbox_to_anchor=(0, 1.0, 1, 0.2), 
+                fancybox=True, 
+                frameon=False,
+                fontsize="8.5", borderaxespad=0.4, labelspacing=0.5)  #9, 0.5
 
-        # fig = plt.figure(figsize = (4, 3))
-        # ax = fig.add_subplot()
-        # sns.lineplot(x = layer_dict['35M']/layer_dict['35M'][-1], y = ov_gt_35M, marker = 'o', label = 'ESM2-35M')
-        # sns.lineplot(x = layer_dict['650M']/layer_dict['650M'][-1], y = ov_gt_650M, marker = 'o', label = 'ESM2-650M')
-        # sns.lineplot(x = layer_dict['3B']/layer_dict['3B'][-1], y = ov_gt_3B, marker = 'o', label = 'ESM2-3B')
-        # ax.legend()
-        # ax.set_ylabel('$\chi^{l, gt}$', fontsize = 14)
-        # ax.set_xlabel('relative depth', fontsize = 12)
-        # ax.set_title('')
-        # plt.tight_layout()
-        # plt.savefig('./results/overlap_ground_truth_protein.png', dpi = 150)
+        for legend_text in leg.get_texts():
+            legend_text.set_color("#393A3A")
+
+        plt.xlim([-0.05, 1.05])
+        plt.ylim([0, 1])
+
+        xlabel = plt.xlabel('relative depth', fontsize=12)
+        xlabel.set_color("#393A3A")
+
+        ylabel  = plt.ylabel(r'$\chi^{l,gt}$', fontsize=12)
+        ylabel.set_color("#393A3A")
+        
+        plt.xticks(fontsize=12)
+        plt.yticks(fontsize=12)
+        plt.tick_params(bottom = False, left=False)
+        plt.grid()
+        plt.gcf().set_size_inches(4.7, 4) 
+        
+        plt.tight_layout()
+        plt.savefig('./results/overlap_ground_truth_protein.png', dpi = 150)
+
 
 
 
