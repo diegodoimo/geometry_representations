@@ -13,7 +13,7 @@ You can get miniconda from https://docs.conda.io/en/latest/miniconda.html. Then 
 ```
 conda create -n  geom_transformers                            
 conda activate geom_transformers
-conda install python numpy matplotlib seaborn scikit-learn
+conda install python numpy matplotlib seaborn scikit-learn psutil
 conda install pytorch    
 pip install dadapy     
 ```
