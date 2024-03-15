@@ -36,11 +36,14 @@ python download.py --dataset protein
 ## Plot the intrinsic dimension and overlap profiles
 ### Image
 Once you have downloaded the numpy arrays with the ratio of distances between the second and first nearest neighbor, the intrinsic dimension can be plotted with:
-
+results/intrinsic_dimension_image.png
 ```
 python plot_id_overlap.py --plot_id --dataset image
 ```
-![Alt text](results/intrinsic_dimension_image.png)
+
+
+<img src="results/intrinsic_dimension_image.png" width="400" height="330">
+
 
 
 and the overlap with the ground truth labels with:
@@ -48,7 +51,9 @@ and the overlap with the ground truth labels with:
 ```
 python plot_id_overlap.py --plot_overlap  --dataset image
 ```
-![Alt text](results/overlap_ground_truth_image.png)
+
+# <img src="results/overlap_ground_truth_image.png" width="400" height="330">
+
 
 ### Protein
 Once you have downloaded the already computed IDs values and neighbor overlap values, you can plot the results with the following:
@@ -56,13 +61,18 @@ Once you have downloaded the already computed IDs values and neighbor overlap va
 ```
 python plot_id_overlap.py --plot_id --dataset protein
 ```
-![Alt text](results/intrinsic_dimension_protein.png)
+
+
+<img src="results/intrinsic_dimension_protein.png" width="400" height="330">
 
 ```
 python plot_id_overlap.py --plot_overlap  --dataset protein
 ```
 
-![Alt text](results/overlap_ground_truth_protein.png)
+<img src="results/overlap_ground_truth_protein.png" width="400" height="330">
+
+
+
 
 ## Compute the distance matrices 
 ### Image
