@@ -2,44 +2,53 @@ import argparse
 import requests
 import pathlib
 import zipfile
+import os
+
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--path", type=str, default="./results")
-    parser.add_argument("--dataset", type=str, default="image")
+    parser.add_argument("--target_dir", type=str, default="./results")
     args = parser.parse_args()
     return args
 
 
-def main(args):    
-    if args.dataset == 'image':
-        print('Downloading image dataset')
-    
-        urls = ['https://figshare.com/ndownloader/files/40694132']
-        pathlib.Path(f'{args.path}').mkdir(parents=True, exist_ok=True)
-        for url in urls:
-            r = requests.get(url, stream=True)
-            with open(f"{args.path}/data_transf_repr_image.zip", "wb") as f:
-                f.write(r.content)
+def download_and_extract_dataset(url, filename, target_dir):
 
-        with zipfile.ZipFile(f"{args.path}/data_transf_repr_image.zip", 'r') as zip_ref:
-            zip_ref.extractall(f"{args.path}")
+    if filename.split(".")[0].split("_")[-1] == "protein":
+        target_dir += "/data"
+    pathlib.Path(target_dir).mkdir(parents=True, exist_ok=True)
 
-    elif args.dataset == 'protein':
-        print('Downloading protein dataset')
+    # download the zip file
+    pathlib.Path(target_dir).mkdir(parents=True, exist_ok=True)
+    with open(f"{target_dir}/{filename}", "wb") as f:
+        r = requests.get(url, stream=True)
+        f.write(r.content)
 
-        urls = ['https://figshare.com/ndownloader/articles/23137958/versions/1']
-        pathlib.Path(f'{args.path}').mkdir(parents=True, exist_ok=True)
-        for url in urls:
-            r = requests.get(url, stream=True)
-            with open(f"{args.path}/data_transf_repr_protein.zip", "wb") as f:
-                f.write(r.content)
+    # extract the zipped content
+    with zipfile.ZipFile(f"{target_dir}/{filename}", "r") as zip_ref:
+        zip_ref.extractall(target_dir)
 
-        with zipfile.ZipFile(f"{args.path}/data_transf_repr_protein.zip", 'r') as zip_ref:
-            pathlib.Path(f"{args.path+'/data'}").mkdir(parents=True, exist_ok=True)
-            zip_ref.extractall(f"{args.path+'/data'}")
-    
-    
+    os.remove(f"{target_dir}/{filename}")
+
+
 if __name__ == "__main__":
     args = parse_arguments()
-    main(args)
+
+    datasets = [
+        {
+            "url": "https://figshare.com/ndownloader/files/40694132",
+            "filename": "data_transf_repr_image.zip",
+        },
+        {
+            "url": "https://figshare.com/ndownloader/articles/23137958/versions/1",
+            "filename": "data_transf_repr_protein.zip",
+        },
+    ]
+
+    for dataset in datasets:
+        print(f"Downloading {dataset['filename'].split('.')[0]} dataset")
+        download_and_extract_dataset(
+            dataset["url"], dataset["filename"], args.target_dir
+        )
+
+    print(f"\nID AND OVERLAP DATA SAVED IN {args.target_dir}/data")

@@ -11,66 +11,39 @@ Source code of the paper  The geometry of hidden representations of large transf
 You can get miniconda from https://docs.conda.io/en/latest/miniconda.html. Then, install the dependencies shown below manually.
 
 ```
-conda create -n  geom_transformers                            
-conda activate geom_transformers
-conda install python numpy matplotlib seaborn scikit-learn psutil
-conda install pytorch    
-pip install dadapy     
+conda create -n  geometry_representations python=3.11 pip
+conda activate geometry_representations
+pip install -r requirements.txt   
 ```
 
 ## Reproduce the plots of the paper
 ### Download the computed intrinsic dimension and overlaps. 
-The intrinsic dimension estimation used the ratio of the distances between the second and first nearest neighbor of each data point. The overlap computation requires instead the knowledge of the neighborhood composition. The download.py script downloads the numpy arrays needed to reproduce the plots shown in the paper.
+The download.py script downloads the numpy arrays needed to reproduce the plots shown in the paper.
 
 ```
-python download.py --dataset image
-```
-
-### Protein
-For the protein analysis, the computation of intrinsic dimension will be directly provided as the overlap computation for the remote homology task. This will be improved in further updates.
-
-```
-python download.py --dataset protein
+python download.py 
 ```
 
 ## Plot the intrinsic dimension and overlap profiles
 ### Image
-Once you have downloaded the numpy arrays with the ratio of distances between the second and first nearest neighbor, the intrinsic dimension can be plotted with:
-results/intrinsic_dimension_image.png
-```
-python plot_id_overlap.py --plot_id --dataset image
-```
+With the following, you can plot the intrinsic dimension profiles (Fig. 1) and the overlap with the class labels (Fig. 4). The plots shown below are saved by default in "./results/plots"
 
+```
+python plot_id_overlap.py 
+```
 
 <img src="results/intrinsic_dimension_image.png" width="400" height="330">
 
 
-
-and the overlap with the ground truth labels with:
-
-```
-python plot_id_overlap.py --plot_overlap  --dataset image
-```
-
 # <img src="results/overlap_ground_truth_image.png" width="400" height="330">
 
 
-### Protein
-Once you have downloaded the already computed IDs values and neighbor overlap values, you can plot the results with the following:
-
-```
-python plot_id_overlap.py --plot_id --dataset protein
-```
-
-
-<img src="results/intrinsic_dimension_protein.png" width="400" height="330">
-
-```
-python plot_id_overlap.py --plot_overlap  --dataset protein
-```
-
-<img src="results/overlap_ground_truth_protein.png" width="400" height="330">
-
+<table>
+  <tr>
+    <td><img src="results/plots/esm_id_ov_labels.pngresults/plots/igpt_id_ov_labels.png" width="200"></td>
+    <td><img src=results/plots/esm_id_ov_labels.png width="200"></td>
+  </tr>
+</table>
 
 
 

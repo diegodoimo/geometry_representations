@@ -1,0 +1,7 @@
+numpy 
+matplotlib 
+seaborn 
+scikit-learn 
+psutil
+requests
+dadapy   
