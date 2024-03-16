@@ -6,7 +6,11 @@ Source code of the paper  The geometry of hidden representations of large transf
 ## Platforms:
 - Ubuntu 22.04
 
-## Install
+
+
+## Reproduce the plots of the paper
+
+### 1. Install
 
 You can get miniconda from https://docs.conda.io/en/latest/miniconda.html. Then, install the dependencies shown below manually.
 
@@ -16,15 +20,14 @@ conda activate geometry_representations
 pip install -r requirements.txt   
 ```
 
-## Reproduce the plots of the paper
-### Download the computed intrinsic dimension and overlaps. 
+### 2. Download the computed intrinsic dimension and overlaps. 
 The download.py script downloads the numpy arrays needed to reproduce the plots shown in the paper.
 
 ```
 python download.py 
 ```
 
-### Plot the intrinsic dimension and overlap profiles
+### 3. Plot the intrinsic dimension and overlap profiles
 You can plot the intrinsic dimension profiles (Fig. 1) and the overlap with the class labels (Fig. 4).
 
 ```
@@ -40,29 +43,27 @@ The plots shown below are saved by default in "./results/plots".
 </table>
 
 
-The iGPT intrinsic dimension and overlaps are computed using the nearest neighbors' distance matrices. For the neighborhood overlap (bottom-right), we provide only a small number of checkpoints. 
+The iGPT intrinsic dimension and overlaps are computed using the nearest neighbors' distance matrices you downloaded in 2. For the neighborhood overlap (bottom-right), we provide only a small number of checkpoints.
+
 You can use the code from the following section to extract the distance matrices of all the layers in iGPT.
 
 
 
 
-## Compute the distance matrices 
-### Image
+## Extract the representations and compute the distance matrices of iGPT
 
-If you'd like to compute yourself the distance matrix of other hidden representations of the ImageNet dataset:
-
-   * #### Download the i-gpt pretrained models following the instructions at https://github.com/openai/image-gpt 
-
-
-   * #### Compute the nearest neighbor matrix of an hidden layer representation:
-
-   To compute the nearest neighbor matrix, you need to store the pre-trained model weights in "model_folder" and the ImageNet dataset in "imagenet_folder." 
-
-   To compute the distance matrix of the 'layer 16' of the iGPT 'small' architecture on the ImageNet training set type:
-
+1. #### Download the i-gpt pretrained models following the instructions at https://github.com/openai/image-gpt
+   - the conda environment and dependencies differ from those used above to reproduce the paper plot. Please stick to the package versions required by **https://github.com/openai/image-gpt**
+     
+2. #### Compute the nearest neighbor matrix of a hidden layer representation:
     ```
-    python  get_distance_matrices.py --model small --ckpt_path "model_folder" --data_path "model_folder" --trainset --hidden_repr 16
+    python  get_distance_matrices.py --model small --ckpt_path "model_folder" --data_path "imagenet_folder" --trainset --hidden_repr 16
     ```
+*--ckpt_path* is the directory where you stored the model checkpoints downloaded in 1.;
+
+*--data_path* is the directory where you stored the ImageNet dataset as downloaded in 1. In the paper, we analyzed 90000 inputs from the ImageNet **training set**; 
+
+*--hidden_repr* is the layer you want to extract.
 
 
 
