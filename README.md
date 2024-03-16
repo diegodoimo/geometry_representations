@@ -34,7 +34,7 @@ python plot_id_overlap.py
 
 <table>
   <tr>
-    <td><img src="results/plots/esm_id_ov_labels.pngresults/plots/igpt_id_ov_labels.png" width="200"></td>
+    <td><img src=results/plots/igpt_id_ov_labels.png width="200"></td>
     <td><img src=results/plots/esm_id_ov_labels.png width="200"></td>
   </tr>
 </table>
