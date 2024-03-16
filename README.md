@@ -18,8 +18,8 @@ conda install pytorch
 pip install dadapy     
 ```
 
-## Download the data to reproduce the plots in the paper
-### Image
+## Reproduce the plots of the paper
+### Download the computed intrinsic dimension and overlaps. 
 The intrinsic dimension estimation used the ratio of the distances between the second and first nearest neighbor of each data point. The overlap computation requires instead the knowledge of the neighborhood composition. The download.py script downloads the numpy arrays needed to reproduce the plots shown in the paper.
 
 ```
