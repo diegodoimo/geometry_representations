@@ -24,13 +24,13 @@ The download.py script downloads the numpy arrays needed to reproduce the plots 
 python download.py 
 ```
 
-## Plot the intrinsic dimension and overlap profiles
-### Image
-With the following, you can plot the intrinsic dimension profiles (Fig. 1) and the overlap with the class labels (Fig. 4). The plots shown below are saved by default in "./results/plots"
+### Plot the intrinsic dimension and overlap profiles
+You can plot the intrinsic dimension profiles (Fig. 1) and the overlap with the class labels (Fig. 4).
 
 ```
 python plot_id_overlap.py 
 ```
+The plots shown below are saved by default in "./results/plots".
 
 <table>
   <tr>
@@ -38,6 +38,11 @@ python plot_id_overlap.py
     <td><img src=results/plots/esm_id_ov_labels.png width="300"></td>
   </tr>
 </table>
+
+
+The iGPT intrinsic dimension and overlaps are computed using the nearest neighbors' distance matrices. For the neighborhood overlap (bottom-right), we provide only a small number of checkpoints. 
+You can use the code from the following section to extract the distance matrices of all the layers in iGPT.
+
 
 
 
@@ -58,8 +63,6 @@ If you'd like to compute yourself the distance matrix of other hidden representa
     ```
     python  get_distance_matrices.py --model small --ckpt_path "model_folder" --data_path "model_folder" --trainset --hidden_repr 16
     ```
-
-### Protein 
 
 
 
