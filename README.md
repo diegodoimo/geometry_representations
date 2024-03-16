@@ -32,12 +32,6 @@ With the following, you can plot the intrinsic dimension profiles (Fig. 1) and t
 python plot_id_overlap.py 
 ```
 
-<img src="results/intrinsic_dimension_image.png" width="400" height="330">
-
-
-# <img src="results/overlap_ground_truth_image.png" width="400" height="330">
-
-
 <table>
   <tr>
     <td><img src="results/plots/esm_id_ov_labels.pngresults/plots/igpt_id_ov_labels.png" width="200"></td>
