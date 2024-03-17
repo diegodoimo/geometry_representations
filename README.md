@@ -41,7 +41,7 @@ In this case, Y (shape: N) is a 1d-numpy array containing the integer class labe
 In the paper, we also compute the overlap between pairs of representations (Fig. 2). If X2 is a second representation (shape: N x d2), the overlap between X and X2 can be computed as:
 
 ```python
-overlap_X2 = data.return_data_overlap(X2)
+overlap_X2 = data.return_data_overlap(X2, k=30)
 
 ```
 <br>
