@@ -4,4 +4,4 @@ seaborn
 scikit-learn 
 psutil
 requests
-dadapy   
+git+https://github.com/sissa-data-science/DADApy
