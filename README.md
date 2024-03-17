@@ -49,10 +49,10 @@ overlap_X2 = data.return_data_overlap(X2)
 
 In the following, we provide the code to reproduce the paper's results.
 
-In **1. Reproduce the paper plots** the code reproduces some paper plots starting from some precomputed statistics (mu_ratios for ID and nearest neighbor indices for the overlap). We use some Dadapy functions to compute ID and overlap for iGPT.<br>
+In **1. Reproduce the paper plots**, the code reproduces some paper plots starting from some precomputed statistics (mu_ratios for ID and nearest neighbor indices for the overlaps. See the Method section of the [paper](https://arxiv.org/pdf/2302.00294.pdf) for the meaning of these quantities). We use some Dadapy functions to compute ID and overlap for iGPT.<br>
 For esm2, we directly provide the precomputed IDs and overlap with labels.
 
-In **2. Extract the representations** the code extracts the distance matrices required for the ID and overlap computation from iGPT.
+In **2. Extract the representations**, the code extracts the distance matrices required for the ID and overlap computation from iGPT.
 
 
 
