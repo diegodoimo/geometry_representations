@@ -7,10 +7,9 @@ Source code of the paper  The geometry of hidden representations of large transf
 - Ubuntu 22.04
 
 
-
 ## Reproduce the plots of the paper
 
-### 1. Install
+### 1. Build an environment with the required dependencies
 
 You can get miniconda from https://docs.conda.io/en/latest/miniconda.html. Then, install the dependencies shown below manually.
 
