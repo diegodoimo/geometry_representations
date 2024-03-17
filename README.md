@@ -28,7 +28,7 @@ id_list_2NN, _, _ = data.return_id_scaling_2NN()
 id_list_gride, _, _ = data.return_id_scaling_gride()
 ```
 The two methods provide similar results; you can choose either of them. The second is slightly faster and more robust. 
-Check Appendix B of the [paper](https://arxiv.org/pdf/2302.00294.pdf) for the implementation choices we made to compute the ID.
+The above methods output a list of intrinsic dimensions; check Appendix B of the [paper](https://arxiv.org/pdf/2302.00294.pdf) to see how we select the ID we plot in the figures.
 
 
 The overlap with the labels Y (Fig. 4) can be computed as:
