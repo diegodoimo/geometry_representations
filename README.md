@@ -33,7 +33,7 @@ Check Appendix B of the [paper](https://arxiv.org/pdf/2302.00294.pdf) for the im
 The overlap with the labels Y (Fig. 4) can be computed as:
 
 ```python
-overlap_labels = data.return_label_overlap(Y)
+overlap_labels = data.return_label_overlap(Y, k= 30)
 
 ```
 In this case, Y (shape: N) is a 1d-numpy array containing the integer class label associated with each example.
