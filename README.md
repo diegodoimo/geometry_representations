@@ -3,7 +3,7 @@
 Source code of the paper  The geometry of hidden representations of large transformer models
 
 
-## Platforms:
+## Platform
 - Ubuntu 22.04
 
 
@@ -104,16 +104,16 @@ You can use the code from the following section to extract the distance matrices
 ## 2. Extract the representations and compute the distance matrices of iGPT
 
 #### a. Download the i-gpt pretrained models following the instructions at https://github.com/openai/image-gpt
-   - the conda environment and dependencies differ from those used above to reproduce the paper plot. Please stick to the package versions required by **https://github.com/openai/image-gpt**
+   - the conda environment and dependencies differ from those used above to reproduce the paper plot. Please build the environment and dependencies as shown in **https://github.com/openai/image-gpt**. From within the environment, run the following code:
      
-#### b. Compute the nearest neighbor matrix of a hidden layer representation:
+#### b. Compute the nearest neighbor matrix of a hidden layer representation
 
     ```
     python  get_distance_matrices.py --model small --ckpt_path "model_folder" --data_path "imagenet_folder" --trainset --hidden_repr 16
     ```
-*--ckpt_path* is the directory where you stored the model checkpoints downloaded in 1.;
+*--ckpt_path* is the directory where you stored the model checkpoints downloaded in a.;
 
-*--data_path* is the directory where you stored the ImageNet dataset as downloaded in 1. In the paper, we analyzed 90000 inputs from the ImageNet **training set**; 
+*--data_path* is the directory where you stored the ImageNet dataset as downloaded in a. In the paper, we analyzed 90000 inputs from the ImageNet **training set**; 
 
 *--hidden_repr* is the layer you want to extract.
 
