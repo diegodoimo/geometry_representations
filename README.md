@@ -7,7 +7,6 @@ Source code of the paper  The geometry of hidden representations of large transf
 - Ubuntu 22.04
 
 
-
 ## Premise
 
 The results of the paper rely on intrinsic dimension and neighborhood overlap computation.
@@ -46,7 +45,6 @@ overlap_X2 = data.return_data_overlap(X2)
 
 ```
 <br>
-<br>
 
 
 In the following, we provide the code to reproduce the paper's results.
@@ -55,6 +53,10 @@ In **1. Reproduce the paper plots** the code reproduces some paper plots startin
 For esm2, we directly provide the precomputed IDs and overlap with labels.
 
 In **2. Extract the representations** the code extracts the distance matrices required for the ID and overlap computation from iGPT.
+
+
+
+<br>
 
 ## 1. Reproduce the paper plots
 
@@ -96,7 +98,7 @@ The iGPT intrinsic dimension and overlaps are computed using the nearest neighbo
 You can use the code from the following section to extract the distance matrices of all the layers in iGPT.
 
 
-
+<br>
 
 ## 2. Extract the representations and compute the distance matrices of iGPT
 
