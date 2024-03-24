@@ -143,7 +143,7 @@ python  src/run.py
 --data_dir "imagenet_folder" 
 --results_dir "./results" 
 --nimg_cat 300 
---n_sub_batch 8 \
+--n_sub_batch 8 
 ```
 
 With this setup the distance matrices are not computed. 
