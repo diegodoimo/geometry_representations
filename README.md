@@ -102,20 +102,28 @@ You can use the code from the following section to extract the distance matrices
 ## 2. Extract the representations and compute the distance matrices of iGPT
 
 #### a. Download the i-gpt pretrained models following the instructions at https://github.com/openai/image-gpt
-   - the conda environment and dependencies differ from those used above to reproduce the paper plot. Please build the environment and dependencies as shown in **https://github.com/openai/image-gpt**. From within the environment, run the following code:
 
+```
+conda create --name image-gpt python=3.7.3 pip
+conda activate image-gpt
+pip install -r requirements_igpt.txt   
+```
+
+```
+python src/download_igpt.py --model s --ckpt 1000000 --dataset imagenet --download_dir igpt_models
+```
 
 #### b. Compute the nearest neighbor matrix. 
 
-    ```
-    python  src/run.py 
-    --ckpt_dir "model_folder" \
-    --model "s" \
-    --data_dir "imagenet_folder" \
-    --results_dir "./results" \
-    --nimg_cat 300 \
-    --n_sub_batch $bs \
-    ```
+```
+python  src/run.py 
+--data_dir igpt_models \
+--ckpt_dir igpt_models \
+--model "s" \
+--results_dir "./results" \
+--nimg_cat 300 \
+--n_sub_batch $bs \
+```
 
 *--ckpt_path* is the directory where you stored the model checkpoints downloaded in a.;
 *--model* 's'  means that you are analyzing the small model
@@ -132,15 +140,15 @@ In the run.py we extract only the 300 classes from the imagenet **TRAINING SET**
 If you just want to extract the hidden layer representations, add the following input argument to the previous ones
 *--activations*  
 
-    ```
-    python  src/run.py 
-    --activations \
-    --ckpt_dir "model_folder" \
-    --model "s" \
-    --data_dir "imagenet_folder" \
-    --results_dir "./results" \
-    --nimg_cat 300 \
-    --n_sub_batch $bs \
-    ```
+```
+python  src/run.py 
+--activations \
+--data_dir igpt_models \
+--ckpt_dir igpt_models \
+--model "s" \
+--results_dir "./results" \
+--nimg_cat 300 \
+--n_sub_batch $bs \
+```
 
 With this setup the distance matrices are not computed. 
