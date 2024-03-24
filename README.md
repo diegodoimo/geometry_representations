@@ -56,6 +56,7 @@ In **2. Extract the representations**, the code extracts the distance matrices r
 
 
 <br>
+<br>
 
 ## 1. Reproduce the paper plots
 
@@ -97,6 +98,7 @@ The iGPT intrinsic dimension and overlaps are computed using the nearest neighbo
 You can use the code from the following section to extract the distance matrices of all the layers in iGPT.
 
 
+<br>
 <br>
 
 ## 2. Extract the representations and compute the distance matrices of iGPT
