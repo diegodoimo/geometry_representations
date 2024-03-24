@@ -1,6 +1,7 @@
 # The geometry of hidden representations of large transformer models
 
-Source code of the paper  The geometry of hidden representations of large transformer models
+Source code of the paper:  '[The geometry of hidden representations of large transformer models](https://arxiv.org/abs/2302.00294)'. 
+This work has been included in the [NeurIPS 2023 proceedings](https://papers.nips.cc/paper_files/paper/2023/hash/a0e66093d7168b40246af1cddc025daa-Abstract-Conference.html).
 
 
 ## Platform
