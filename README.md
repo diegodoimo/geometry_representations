@@ -111,12 +111,12 @@ You can use the code from the following section to extract the distance matrices
 
 ```
 python  src/run.py 
---ckpt_dir "model_folder" \
---model "s" \
---data_dir "imagenet_folder" \
---results_dir "./results" \
---nimg_cat 300 \
---n_sub_batch 8 \
+--ckpt_dir "model_folder" 
+--model "s" 
+--data_dir "imagenet_folder" 
+--results_dir "./results" 
+--nimg_cat 300 
+--n_sub_batch 8 
 ```
 
 *--ckpt_path* is the directory where you stored the model checkpoints downloaded in a.; <br>
@@ -137,12 +137,12 @@ If you just want to extract the hidden layer representations, add the *--activat
 
 ```
 python  src/run.py 
---activations \
---ckpt_dir "model_folder" \
---model "s" \
---data_dir "imagenet_folder" \
---results_dir "./results" \
---nimg_cat 300 \
+--activations 
+--ckpt_dir "model_folder" 
+--model "s" 
+--data_dir "imagenet_folder" 
+--results_dir "./results" 
+--nimg_cat 300 
 --n_sub_batch 8 \
 ```
 
