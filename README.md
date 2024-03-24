@@ -125,7 +125,7 @@ python  src/run.py
 *--n_sub_batch*  is the batch size <br>
 
 In the run.py we extract only the 300 classes from the imagenet **TRAINING SET** analyzed in the paper. <br>
-The class labels are stored in the 'src/hier_nucl_labels.npy' array. Thus, with the above setup you extract 90k samples of the imagenet training set. 
+The class labels are stored in the './hier_nucl_labels.npy' array. Thus, with the above setup you extract 90k samples of the imagenet training set. 
 
 
 #### c. Extract the hidden layer representations.
