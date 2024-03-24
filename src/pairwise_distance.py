@@ -4,72 +4,82 @@ from sklearn.metrics import pairwise_distances_chunked
 import math
 import copy
 
-def _kneighbors_reduce_func(dist, start, n_neighbors, range_scaling=None, argsort = False):
-	"""Reduce a chunk of distances to the nearest neighbors.
-	Callback to :func:`sklearn.metrics.pairwise.pairwise_distances_chunked`
-	Parameters
-	----------
-	dist : ndarray of shape (n_samples_chunk, n_samples)
-		The distance matrix.
-	start : int
-		The index in X which the first row of dist corresponds to.
-	n_neighbors : int
-		Number of neighbors required for each sample.
-	return_distance : bool
-		Whether or not to return the distances.
-	Returns
-	-------
-	dist : array of shape (n_samples_chunk, n_neighbors)
-		Returned only if `return_distance=True`.
-	neigh : array of shape (n_samples_chunk, n_neighbors)
-		The neighbors indices.
-	"""
 
-	if range_scaling is not None:
-		"maybe faster without argpartition"
-		max_step = int(math.log(range_scaling, 2))
-		steps = np.array([2**i for i in range(max_step)])
-		sample_range = np.arange(dist.shape[0])[:, None]
-		if argsort:
-			neigh_ind = np.argsort(dist, axis = 1)[:, : range_scaling]
-			print(neigh_ind.shape)
-		else:
-			neigh_ind = np.argpartition(dist, steps[-1], axis=1)
-			neigh_ind = neigh_ind[:, :steps[-1]+1]
-			# argpartition doesn't guarantee sorted order, so we sort again
-			neigh_ind = neigh_ind[sample_range, np.argsort(dist[sample_range, neigh_ind])]
-			print(neigh_ind.shape)
+def _kneighbors_reduce_func(
+    dist, start, n_neighbors, range_scaling=None, argsort=False
+):
+    """Reduce a chunk of distances to the nearest neighbors.
+    Callback to :func:`sklearn.metrics.pairwise.pairwise_distances_chunked`
+    Parameters
+    ----------
+    dist : ndarray of shape (n_samples_chunk, n_samples)
+            The distance matrix.
+    start : int
+            The index in X which the first row of dist corresponds to.
+    n_neighbors : int
+            Number of neighbors required for each sample.
+    return_distance : bool
+            Whether or not to return the distances.
+    Returns
+    -------
+    dist : array of shape (n_samples_chunk, n_neighbors)
+            Returned only if `return_distance=True`.
+    neigh : array of shape (n_samples_chunk, n_neighbors)
+            The neighbors indices.
+    """
 
-		#print(neigh_ind.shape)
-		"compute mus and rs"
-		dist = np.sqrt(dist[sample_range, neigh_ind])
+    if range_scaling is not None:
+        "maybe faster without argpartition"
+        max_step = int(math.log(range_scaling, 2))
+        steps = np.array([2**i for i in range(max_step)])
+        sample_range = np.arange(dist.shape[0])[:, None]
+        if argsort:
+            neigh_ind = np.argsort(dist, axis=1)[:, :range_scaling]
+            print(neigh_ind.shape)
+        else:
+            neigh_ind = np.argpartition(dist, steps[-1], axis=1)
+            neigh_ind = neigh_ind[:, : steps[-1] + 1]
+            # argpartition doesn't guarantee sorted order, so we sort again
+            neigh_ind = neigh_ind[
+                sample_range, np.argsort(dist[sample_range, neigh_ind])
+            ]
+            print(neigh_ind.shape)
 
-		# find all points with any zero distance
-		indx_ = np.nonzero(dist[:, 1] < np.finfo(dist.dtype).eps)[0]
-		# set nearest distance to eps:
-		dist[indx_, 1] = 10*np.finfo(dist.dtype).eps
+        # print(neigh_ind.shape)
+        "compute mus and rs"
+        dist = np.sqrt(dist[sample_range, neigh_ind])
+
+        # find all points with any zero distance
+        indx_ = np.nonzero(dist[:, 1] < np.finfo(dist.dtype).eps)[0]
+        # set nearest distance to eps:
+        dist[indx_, 1] = 10 * np.finfo(dist.dtype).eps
+
+        mus = dist[:, steps[1:]] / dist[:, steps[:-1]]
+        rs = dist[:, np.array([steps[:-1], steps[1:]])]
+
+        dist = copy.deepcopy(dist[:, :n_neighbors])
+        neigh_ind = copy.deepcopy(neigh_ind[:, :n_neighbors])
+        #
+        return dist, neigh_ind, mus, rs
+
+    else:
+        sample_range = np.arange(dist.shape[0])[:, None]
+        neigh_ind = np.argpartition(dist, n_neighbors - 1, axis=1)
+        neigh_ind = neigh_ind[sample_range, np.argsort(dist[sample_range, neigh_ind])]
+        neigh_ind1 = copy.deepcopy(neigh_ind[:, :n_neighbors])
+
+    return np.sqrt(dist[sample_range, neigh_ind1[:, :]]), neigh_ind1
 
 
-
-		mus = dist[:, steps[1:]] / dist[:, steps[:-1]]
-		rs = dist[:, np.array([steps[:-1], steps[1:]])]
-
-		dist = copy.deepcopy(dist[:, : n_neighbors])
-		neigh_ind = copy.deepcopy(neigh_ind[:, : n_neighbors])
-		#
-		return dist, neigh_ind, mus, rs
-
-
-	else:
-		sample_range = np.arange(dist.shape[0])[:, None]
-		neigh_ind = np.argpartition(dist, n_neighbors - 1, axis=1)
-		neigh_ind = neigh_ind[sample_range, np.argsort(dist[sample_range, neigh_ind])]
-		neigh_ind1 = copy.deepcopy(neigh_ind[:, :n_neighbors])
-
-	return np.sqrt(dist[sample_range, neigh_ind1[:, :]]), neigh_ind1
-
-
-def compute_distances(X, n_neighbors, range_scaling = None, Y = None, working_memory=1024, n_jobs=1, argsort = False):
+def compute_distances(
+    X,
+    n_neighbors,
+    range_scaling=None,
+    Y=None,
+    working_memory=1024,
+    n_jobs=1,
+    argsort=False,
+):
     """
     Description:
         adapted from kneighbors function of sklearn
@@ -90,7 +100,10 @@ def compute_distances(X, n_neighbors, range_scaling = None, Y = None, working_me
     """
 
     reduce_func = partial(
-        _kneighbors_reduce_func, n_neighbors=n_neighbors, range_scaling= range_scaling, argsort = argsort
+        _kneighbors_reduce_func,
+        n_neighbors=n_neighbors,
+        range_scaling=range_scaling,
+        argsort=argsort,
     )
 
     kwds = {"squared": True}
@@ -112,13 +125,13 @@ def compute_distances(X, n_neighbors, range_scaling = None, Y = None, working_me
         neigh_dist, neigh_ind, mus, rs = zip(*chunked_results)
         return (
             np.vstack(neigh_dist),
-            np.vstack(neigh_ind).astype('int32'),
+            np.vstack(neigh_ind).astype("int32"),
             np.vstack(mus),
             np.vstack(rs),
-            )
+        )
     else:
         neigh_dist, neigh_ind = zip(*chunked_results)
         return (
-        np.vstack(neigh_dist),
-        np.vstack(neigh_ind).astype('int32'),
+            np.vstack(neigh_dist),
+            np.vstack(neigh_ind).astype("int32"),
         )

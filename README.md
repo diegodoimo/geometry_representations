@@ -103,22 +103,44 @@ You can use the code from the following section to extract the distance matrices
 
 #### a. Download the i-gpt pretrained models following the instructions at https://github.com/openai/image-gpt
    - the conda environment and dependencies differ from those used above to reproduce the paper plot. Please build the environment and dependencies as shown in **https://github.com/openai/image-gpt**. From within the environment, run the following code:
-     
-#### b. Compute the nearest neighbor matrix of a hidden layer representation
+
+
+#### b. Compute the nearest neighbor matrix. 
 
     ```
-    python  get_distance_matrices.py --model small --ckpt_path "model_folder" --data_path "imagenet_folder" --trainset --hidden_repr 16
+    python  src/run.py 
+    --ckpt_dir "model_folder" \
+    --model "s" \
+    --data_dir "imagenet_folder" \
+    --results_dir "./results" \
+    --nimg_cat 300 \
+    --n_sub_batch $bs \
     ```
+
 *--ckpt_path* is the directory where you stored the model checkpoints downloaded in a.;
+*--model* 's'  means that you are analyzing the small model
+*--data_dir* is the directory where you stored the ImageNet dataset as downloaded in a. 
+*--results_dir* directory where the representations/distance matrices are saved
+*--nimg_cat* number of images per class analyzed (300 in the paper)
+*--n_sub_batch*  is the batch size
 
-*--data_path* is the directory where you stored the ImageNet dataset as downloaded in a. In the paper, we analyzed 90000 inputs from the ImageNet **training set**; 
-
-*--hidden_repr* is the layer you want to extract.
-
-
-
-
-
+In the run.py we extract only the 300 classes from the imagenet **TRAINING SET** analyzed in the paper. The class labels are stored in the 'src/hier_nucl_labels.npy' array. Thus, with the above setup you extract 90k samples of the imagenet training set. 
 
 
+#### c. Extract the hidden layer representations.
 
+If you just want to extract the hidden layer representations, add the following input argument to the previous ones
+*--activations*  
+
+    ```
+    python  src/run.py 
+    --activations \
+    --ckpt_dir "model_folder" \
+    --model "s" \
+    --data_dir "imagenet_folder" \
+    --results_dir "./results" \
+    --nimg_cat 300 \
+    --n_sub_batch $bs \
+    ```
+
+With this setup the distance matrices are not computed. 
