@@ -10,7 +10,7 @@ Source code of the paper  The geometry of hidden representations of large transf
 ## Premise
 
 The results of the paper rely on intrinsic dimension and neighborhood overlap computation.
-We use the implementation of intrinsic dimension and neighborhood overlap of [Dadapy](https://github.com/sissa-data-science/DADApy).
+We use the implementation of intrinsic dimension and neighborhood overlap of [DADApy](https://github.com/sissa-data-science/DADApy).
 
 With Dadapy, you can compute the intrinsic dimension (Fig. 1, 3) of the dataset representation at a given layer X as follows:
 
