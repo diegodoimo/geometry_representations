@@ -107,40 +107,41 @@ You can use the code from the following section to extract the distance matrices
 
 #### b. Compute the nearest neighbor matrix. 
 
-    ```
-    python  src/run.py 
-    --ckpt_dir "model_folder" \
-    --model "s" \
-    --data_dir "imagenet_folder" \
-    --results_dir "./results" \
-    --nimg_cat 300 \
-    --n_sub_batch $bs \
-    ```
+```
+python  src/run.py 
+--ckpt_dir "model_folder" \
+--model "s" \
+--data_dir "imagenet_folder" \
+--results_dir "./results" \
+--nimg_cat 300 \
+--n_sub_batch $bs \
+```
 
-*--ckpt_path* is the directory where you stored the model checkpoints downloaded in a.;
-*--model* 's'  means that you are analyzing the small model
-*--data_dir* is the directory where you stored the ImageNet dataset as downloaded in a. 
-*--results_dir* directory where the representations/distance matrices are saved
-*--nimg_cat* number of images per class analyzed (300 in the paper)
-*--n_sub_batch*  is the batch size
+*--ckpt_path* is the directory where you stored the model checkpoints downloaded in a.; <br>
+*--model* 's' means that you are analyzing the small model <br>
+*--data_dir* is the directory where you stored the ImageNet dataset as downloaded in a. <br>
+*--results_dir* is the directory where the representations/distance matrices are saved <br>
+*--nimg_cat* is number of images per class analyzed (300 in the paper) <br>
+*--n_sub_batch*  is the batch size <br>
 
-In the run.py we extract only the 300 classes from the imagenet **TRAINING SET** analyzed in the paper. The class labels are stored in the 'src/hier_nucl_labels.npy' array. Thus, with the above setup you extract 90k samples of the imagenet training set. 
+In the run.py we extract only the 300 classes from the imagenet **TRAINING SET** analyzed in the paper. <br>
+The class labels are stored in the 'src/hier_nucl_labels.npy' array. Thus, with the above setup you extract 90k samples of the imagenet training set. 
 
 
 #### c. Extract the hidden layer representations.
 
-If you just want to extract the hidden layer representations, add the following input argument to the previous ones
-*--activations*  
+If you just want to extract the hidden layer representations, add the *--activations* argument to the previous ones:
 
-    ```
-    python  src/run.py 
-    --activations \
-    --ckpt_dir "model_folder" \
-    --model "s" \
-    --data_dir "imagenet_folder" \
-    --results_dir "./results" \
-    --nimg_cat 300 \
-    --n_sub_batch $bs \
-    ```
+
+```
+python  src/run.py 
+--activations \
+--ckpt_dir "model_folder" \
+--model "s" \
+--data_dir "imagenet_folder" \
+--results_dir "./results" \
+--nimg_cat 300 \
+--n_sub_batch $bs \
+```
 
 With this setup the distance matrices are not computed. 
