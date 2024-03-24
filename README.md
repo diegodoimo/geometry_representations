@@ -114,7 +114,7 @@ python  src/run.py
 --data_dir "imagenet_folder" \
 --results_dir "./results" \
 --nimg_cat 300 \
---n_sub_batch $bs \
+--n_sub_batch 8 \
 ```
 
 *--ckpt_path* is the directory where you stored the model checkpoints downloaded in a.; <br>
@@ -141,7 +141,7 @@ python  src/run.py
 --data_dir "imagenet_folder" \
 --results_dir "./results" \
 --nimg_cat 300 \
---n_sub_batch $bs \
+--n_sub_batch 8 \
 ```
 
 With this setup the distance matrices are not computed. 
