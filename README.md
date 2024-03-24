@@ -1,6 +1,7 @@
 # The geometry of hidden representations of large transformer models
 
-Source code of the paper  The geometry of hidden representations of large transformer models
+Source code of the paper:  '[The geometry of hidden representations of large transformer models](https://arxiv.org/abs/2302.00294)'. 
+This work has been included in the [NeurIPS 2023 proceedings](https://papers.nips.cc/paper_files/paper/2023/hash/a0e66093d7168b40246af1cddc025daa-Abstract-Conference.html).
 
 
 ## Platform
@@ -10,7 +11,7 @@ Source code of the paper  The geometry of hidden representations of large transf
 ## Premise
 
 The results of the paper rely on intrinsic dimension and neighborhood overlap computation.
-We use the implementation of intrinsic dimension and neighborhood overlap of [Dadapy](https://github.com/sissa-data-science/DADApy).
+We use the implementation of intrinsic dimension and neighborhood overlap of [DADApy](https://github.com/sissa-data-science/DADApy).
 
 With Dadapy, you can compute the intrinsic dimension (Fig. 1, 3) of the dataset representation at a given layer X as follows:
 
@@ -56,6 +57,7 @@ In **2. Extract the representations**, the code extracts the distance matrices r
 
 
 <br>
+<br>
 
 ## 1. Reproduce the paper plots
 
@@ -98,6 +100,7 @@ You can use the code from the following section to extract the distance matrices
 
 
 <br>
+<br>
 
 ## 2. Extract the representations and compute the distance matrices of iGPT
 
@@ -122,23 +125,23 @@ python  src/run.py
 --model "s" \
 --results_dir "./results" \
 --nimg_cat 300 \
---n_sub_batch $bs \
+--n_sub_batch 8 \
 ```
 
-*--ckpt_path* is the directory where you stored the model checkpoints downloaded in a.;
-*--model* 's'  means that you are analyzing the small model
-*--data_dir* is the directory where you stored the ImageNet dataset as downloaded in a. 
-*--results_dir* directory where the representations/distance matrices are saved
-*--nimg_cat* number of images per class analyzed (300 in the paper)
-*--n_sub_batch*  is the batch size
+*--ckpt_path* is the directory where you stored the model checkpoints downloaded in a.; <br>
+*--model* 's' means that you are analyzing the small model <br>
+*--data_dir* is the directory where you stored the ImageNet dataset as downloaded in a. <br>
+*--results_dir* is the directory where the representations/distance matrices are saved <br>
+*--nimg_cat* is number of images per class analyzed (300 in the paper) <br>
+*--n_sub_batch*  is the batch size <br>
 
-In the run.py we extract only the 300 classes from the imagenet **TRAINING SET** analyzed in the paper. The class labels are stored in the 'src/hier_nucl_labels.npy' array. Thus, with the above setup you extract 90k samples of the imagenet training set. 
+In the run.py we extract only the 300 classes from the imagenet **TRAINING SET** analyzed in the paper. <br>
+The class labels are stored in the './hier_nucl_labels.npy' array. Thus, with the above setup you extract 90k samples of the imagenet training set. 
 
 
 #### c. Extract the hidden layer representations.
 
-If you just want to extract the hidden layer representations, add the following input argument to the previous ones
-*--activations*  
+If you just want to extract the hidden layer representations, add the *--activations* argument to the previous ones:
 
 ```
 python  src/run.py 
@@ -148,7 +151,7 @@ python  src/run.py
 --model "s" \
 --results_dir "./results" \
 --nimg_cat 300 \
---n_sub_batch $bs \
+--n_sub_batch 8 \
 ```
 
 With this setup the distance matrices are not computed. 
