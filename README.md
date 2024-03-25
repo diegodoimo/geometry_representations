@@ -135,6 +135,7 @@ iGPT-small: 894MB; <br>
 iGPT-medium: 5.2GB; <br>
 iGPT-large 15.5GB; <br> 
 ImageNet dataset 11GB. 
+
 <br>
 
 #### b. Compute the nearest neighbor matrix. 
