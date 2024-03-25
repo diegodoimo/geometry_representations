@@ -20,4 +20,4 @@ source /u/area/ddoimo/anaconda3/bin/activate ./env_v100
 export OMP_NUM_TREADS=12
 
 srun -N1 python src/run.py  --data_dir igpt_models  --ckpt_dir igpt_models  --model "s" \
-                        --results_dir "./results"  --nimg_cat 300   --n_sub_batch 64 
+                        --results_dir "./results"  --nimg_cat 10   --n_sub_batch 64

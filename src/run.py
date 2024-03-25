@@ -352,7 +352,7 @@ def evaluate(
     dir_path = f"{args.results_dir}/{args.model_size}"
 
     # ***SAVING THE REPRESENTATIONS
-    if args.representations:
+    if args.activations:
         save_activations(act_dict, dir_path, nsamples, desc, args)
     else:
         save_distances(act_dict, dir_path, nsamples, desc, args)
