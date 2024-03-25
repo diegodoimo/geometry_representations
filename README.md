@@ -104,7 +104,7 @@ You can use the code from the following section to extract the distance matrices
 
 ## 2. Extract the representations and compute the distance matrices of iGPT
 
-#### a. Download the i-gpt pretrained models following the instructions at https://github.com/openai/image-gpt
+We first need to download the pre-trained iGPT models following the instructions in https://github.com/openai/image-gpt. The environment with the required dependencies can be created as follows:
 
 ```
 conda create --name image-gpt python=3.7.3 pip
@@ -116,8 +116,12 @@ conda install tensorflow-gpu=1.13.1
 conda install imageio=2.8.0
 conda install requests=2.21.0
 conda install tqdm=4.46.0
-conda install -c conda-forge scikit-learn
+pip install -U scikit-learn
 ```
+We added the scikit-learn package to the environment of https://github.com/openai/image-gpt. We use it to compute the distance matrices.
+
+#### a. Download the i-gpt pretrained models.
+
 
 ```
 python src/download_igpt.py --model s --ckpt 1000000 --dataset imagenet --download_dir igpt_models
