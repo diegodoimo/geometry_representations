@@ -70,6 +70,7 @@ conda create -n geometry_representations python=3.11 pip
 conda activate geometry_representations
 pip install -r requirements.txt   
 ```
+<br>
 
 ### b. Download the computed intrinsic dimension and overlaps. 
 The download.py script downloads the numpy arrays needed to reproduce the plots shown in the paper.
@@ -77,6 +78,8 @@ The download.py script downloads the numpy arrays needed to reproduce the plots 
 ```
 python download.py 
 ```
+
+<br>
 
 ### c. Plot the intrinsic dimension and overlap profiles
 You can plot the intrinsic dimension profiles (Fig. 1) and the overlap with the class labels (Fig. 4).
@@ -120,12 +123,16 @@ pip install -U scikit-learn
 ```
 We added the scikit-learn package to the environment of https://github.com/openai/image-gpt. We use it to compute the distance matrices.
 
+<br>
+
 #### a. Download the i-gpt pretrained models.
 
 
 ```
 python src/download_igpt.py --model s --ckpt 1000000 --dataset imagenet --download_dir igpt_models
 ```
+
+<br>
 
 #### b. Compute the nearest neighbor matrix. 
 With the following command, you will extract the 24 hidden representations of iGPT-small analyzed in the paper. 
@@ -145,15 +152,16 @@ python  src/run.py
 ```
 
 *--ckpt_path* is the directory where you stored the model checkpoints downloaded in a.; <br>
-*--model* 's' means that you are analyzing the small model <br>
-*--data_dir* is the directory where you stored the ImageNet dataset as downloaded in a. <br>
-*--results_dir* is the directory where the representations/distance matrices are saved <br>
-*--nimg_cat* is number of images per class analyzed (300 in the paper) <br>
-*--n_sub_batch*  is the batch size <br>
+*--model* 's' means that you are analyzing the small model; <br>
+*--data_dir* is the directory where you stored the ImageNet dataset as downloaded in a.; <br>
+*--results_dir* is the directory where the representations/distance matrices are saved; <br>
+*--nimg_cat* is number of images per class analyzed (300 in the paper); <br>
+*--n_sub_batch*  is the batch size. <br>
 
 In the run.py, we extract only the 300 classes from the ImageNet **TRAINING SET** analyzed in the paper. <br>
 The class labels are stored in the './hier_nucl_labels.npy' array. 
 
+<br>
 
 #### c. Extract the hidden layer representations.
 
