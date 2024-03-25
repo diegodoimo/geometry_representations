@@ -1,3 +1,7 @@
+env_v100*
+env_amd*
+igpt_models*
+slurm*
 results/data* 
 generate_data.py
 .DS_Store

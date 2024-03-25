@@ -1,0 +1,6 @@
+python  src/run.py --data_dir igpt_models \
+--ckpt_dir igpt_models \
+--model "s" \
+--results_dir "./results" \
+--nimg_cat 300 \
+--n_sub_batch 8 \

@@ -1,15 +1,21 @@
 #!/bin/bash
-#SBATCH --partition=DGX
+#SBATCH --partition=GPU
 #SBATCH --account=lade
 #SBATCH --nodes=1
 #SBATCH --time=3:00:00            
 #SBATCH --ntasks-per-node=1       
-#SBATCH --cpus-per-task=24           
-#SBATCH --mem=120G                
+#SBATCH --cpus-per-task=12           
+#SBATCH --mem=80G                
 #SBATCH --job-name=test
 ##SBATCH --gres=gpu:1 
 
-source /u/area/ddoimo/anaconda3/bin/activate ./env_amd
+
+
+#source /etc/profile.d/modules.sh
+#module use /opt/nvidia/hpc_sdk/modulefiles/
+#module load nvhpc
+
+source /u/area/ddoimo/anaconda3/bin/activate ./env_v100
 
 export OMP_NUM_TREADS=12
 

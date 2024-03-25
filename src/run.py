@@ -19,7 +19,7 @@ from utils import iter_data, count_parameters
 
 
 # *** ADDED
-import defaultdict
+from collections import defaultdict
 from pairwise_distance import compute_distances
 import pathlib
 
@@ -44,12 +44,12 @@ def parse_arguments():
     # parser.add_argument("--n_embd", type=int, default=512)
     # parser.add_argument("--n_head", type=int, default=8)
     # parser.add_argument("--n_layer", type=int, default=24)
-    # parser.add_argument(
-    #     "--n_px", type=int, default=32, help="image height or width in pixels"
-    # )
-    # parser.add_argument(
-    #     "--n_vocab", type=int, default=512, help="possible values for each pixel"
-    # )
+    parser.add_argument(
+         "--n_px", type=int, default=32, help="image height or width in pixels"
+    )
+    parser.add_argument(
+         "--n_vocab", type=int, default=512, help="possible values for each pixel"
+    )
 
     parser.add_argument(
         "--bert",
@@ -96,6 +96,7 @@ def parse_arguments():
     parser.add_argument("--valset", action="store_true")
     parser.add_argument("--activations", action="store_true")
     parser.add_argument("--save_labels", action="store_true")
+    parser.add_argument("--not_trained", action="store_true")
     parser.add_argument("--maxk", type=int, default=50)
     parser.add_argument("--nimg_cat", type=int, default=300)
     parser.add_argument("--working_memory", type=int, default=1024)
@@ -114,7 +115,7 @@ def set_seed(seed):
 # ***LOADING DATA FUNCTION: modified to extract one dataset at a time***
 def load_data(args):
 
-    data_path = args.data_path
+    data_path = args.data_dir+'/imagenet'
 
     if args.valset:
         Xdata = np.load(f"{data_path}_vaX.npy")
@@ -362,13 +363,7 @@ def main(args):
     set_seed(args.seed)
 
     n_batch = args.n_sub_batch * args.n_gpu
-
-    if args.data_path.endswith("cifar10"):
-        n_class = 10
-    elif args.data_path.endswith("imagenet"):
-        n_class = 1000
-    else:
-        raise ValueError("Dataset not supported.")
+    n_class = 1000 #we just use imagenet
 
     X = tf.placeholder(tf.int32, [n_batch, args.n_px * args.n_px])
     Y = tf.placeholder(tf.float32, [n_batch, n_class])
@@ -382,21 +377,21 @@ def main(args):
         args.n_head = 8
         args.n_layer = 24
         args.model_size = "small"
-        args.ckpt_path += f"/model.ckpt-{args.ckpt_iter}"
+        args.ckpt_dir += f"/model.ckpt-{args.ckpt_iter}"
 
     elif args.model == "m":
         args.n_embd = 1024
         args.n_head = 8
         args.n_layer = 36
         args.model_size = "medium"
-        args.ckpt_path += f"/model.ckpt-{args.ckpt_iter}"
+        args.ckpt_dir += f"/model.ckpt-{args.ckpt_iter}"
 
     elif args.model == "l":
         args.n_embd = 1536
         args.n_head = 16
         args.n_layer = 48
         args.model_size = "large"
-        args.ckpt_path += f"/model.ckpt-{args.ckpt_iter}"
+        args.ckpt_dir += f"/model.ckpt-{args.ckpt_iter}"
 
     # *** SELECT HERE THE LAYER INDICES TO EXTRACT: WE EXTRACT ALL THE LAYERS BY DEFAULT
     # *** THIS CAN REQUIRE A LOT OF CPU-MEMORY SINCE ALL THE DATA REPRESENTATIONS
@@ -433,8 +428,8 @@ def main(args):
         desc = "_untrained"
         if not args.not_trained:
             # *** LOAD MODEL
-            saver.restore(sess, args.ckpt_path)
-            print(f"restored model from ckpt {args.ckpt_path}")
+            saver.restore(sess, args.ckpt_dir)
+            print(f"restored model from ckpt {args.ckpt_dir}")
             sys.stdout.flush()
             desc = ""
             if args.ckpt_iter != 1000000:
