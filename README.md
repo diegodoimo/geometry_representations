@@ -109,7 +109,14 @@ You can use the code from the following section to extract the distance matrices
 ```
 conda create --name image-gpt python=3.7.3 pip
 conda activate image-gpt
-pip install -r requirements_igpt.txt   
+
+conda install numpy=1.16.3
+conda install tensorflow-gpu=1.13.1
+
+conda install imageio=2.8.0
+conda install requests=2.21.0
+conda install tqdm=4.46.0
+conda install -c conda-forge scikit-learn
 ```
 
 ```
