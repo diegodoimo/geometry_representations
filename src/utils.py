@@ -10,29 +10,45 @@ import numpy as np
 import tensorflow as tf
 
 
+# def iter_data(*datas, n_batch=128, truncate=False, verbose=False, max_batches=float("inf")):
+#     n = len(datas[0])
+#     if truncate:
+#         n = (n//n_batch)*n_batch
+#     n = min(n, max_batches*n_batch)
+#     n_batches = 0
+#     #for i in tqdm(range(0, n, n_batch), total=n//n_batch, disable=not verbose, ncols=80, leave=False):
+#     for i in range(0, n, n_batch):
+#         if n_batches >= max_batches: raise StopIteration
+#         if len(datas) == 1:
+#             yield datas[0][i:i+n_batch]
+#         else:
+#             yield (d[i:i+n_batch] for d in datas)
+#         n_batches += 1
+
+
 def iter_data(
     *datas, n_batch=128, truncate=False, verbose=False, max_batches=float("inf")
 ):
     n = len(datas[0])
-    if truncate:
-        n = (n // n_batch) * n_batch
-    n = min(n, max_batches * n_batch)
-    n_batches = 0
-    for i in tqdm(
-        range(0, n, n_batch),
-        total=n // n_batch,
-        disable=not verbose,
-        ncols=80,
-        leave=False,
-    ):
-        if n_batches >= max_batches:
-            raise StopIteration
-        if len(datas) == 1:
-            yield datas[0][i : i + n_batch]
-        else:
-            yield (d[i : i + n_batch] for d in datas)
-        n_batches += 1
+    nbatches = n // n_batch
+    count = 0
 
+    for i in range(0, n, n_batch):
+        if count > nbatches:
+            raise StopIteration
+
+        elif count == nbatches:
+            if len(datas) == 1:
+                yield datas[0][i:]
+            else:
+                yield (d[i:] for d in datas)  # datas has tensors and labels
+
+        elif count < nbatches:
+            if len(datas) == 1:
+                yield datas[0][i : i + n_batch]
+            else:
+                yield (d[i : i + n_batch] for d in datas)
+        count += 1
 
 def squared_euclidean_distance(a, b):
     b = tf.transpose(b)
