@@ -322,8 +322,8 @@ def evaluate(
     for k, (xmb, ymb) in enumerate(
         iter_data(evX, evY, n_batch=n_batch, truncate=True, verbose=True)
     ):
-        if (k + 1) % 1 == 0:
-            print(f"{i*n_batch/1000}k/{nsamples}")
+        if (k + 1) % 20 == 0:
+            print(f"{k*n_batch/1000}k/{nsamples}")
             sys.stdout.flush()
 
         (
