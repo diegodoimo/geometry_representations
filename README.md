@@ -127,11 +127,14 @@ We added the scikit-learn package to the environment of https://github.com/opena
 
 #### a. Download the i-gpt pretrained models.
 
-
 ```
 python src/download_igpt.py --model s --ckpt 1000000 --dataset imagenet --download_dir igpt_models
 ```
-
+The disk memory occupied by models and datasets is as follows: <br>
+iGPT-small: 894MB; <br>
+iGPT-medium: 5.2GB; <br>
+iGPT-large 15.5GB; <br> 
+ImageNet dataset 11GB. 
 <br>
 
 #### b. Compute the nearest neighbor matrix. 
