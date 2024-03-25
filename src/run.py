@@ -19,7 +19,7 @@ from utils import iter_data, count_parameters
 
 
 # *** ADDED
-import defaultdict
+from collections import defaultdict
 from pairwise_distance import compute_distances
 import pathlib
 
