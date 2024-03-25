@@ -202,8 +202,10 @@ def create_model(x, y, n_gpu, hparams):
                 tot_loss.append(results["gen_loss"] + results["clf_loss"])
             else:
                 tot_loss.append(results["gen_loss"])
-            # ***ADDED
+
             accuracy.append(results["accuracy"])
+            # ***ADDED
+            activations.append(results["activations"])
 
             if i == 0:
                 trainable_params = tf.trainable_variables()
