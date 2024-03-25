@@ -126,7 +126,7 @@ We added the scikit-learn package to the environment of https://github.com/opena
 <br>
 
 #### a. Download the i-gpt pretrained models.
-
+You can download the iGPT-small model and the ImageNet dataset (training, validation, test sets) with:
 ```
 python src/download_igpt.py --model s --ckpt 1000000 --dataset imagenet --download_dir igpt_models
 ```
