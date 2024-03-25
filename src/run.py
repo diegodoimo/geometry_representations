@@ -45,10 +45,10 @@ def parse_arguments():
     # parser.add_argument("--n_head", type=int, default=8)
     # parser.add_argument("--n_layer", type=int, default=24)
     parser.add_argument(
-         "--n_px", type=int, default=32, help="image height or width in pixels"
+        "--n_px", type=int, default=32, help="image height or width in pixels"
     )
     parser.add_argument(
-         "--n_vocab", type=int, default=512, help="possible values for each pixel"
+        "--n_vocab", type=int, default=512, help="possible values for each pixel"
     )
 
     parser.add_argument(
@@ -66,7 +66,7 @@ def parse_arguments():
     parser.add_argument(
         "--n_gpu",
         type=int,
-        default=8,
+        default=1,
         help="number of gpus to distribute training across",
     )
 
@@ -115,7 +115,7 @@ def set_seed(seed):
 # ***LOADING DATA FUNCTION: modified to extract one dataset at a time***
 def load_data(args):
 
-    data_path = args.data_dir+'/imagenet'
+    data_path = args.data_dir + "/imagenet"
 
     if args.valset:
         Xdata = np.load(f"{data_path}_vaX.npy")
@@ -363,7 +363,7 @@ def main(args):
     set_seed(args.seed)
 
     n_batch = args.n_sub_batch * args.n_gpu
-    n_class = 1000 #we just use imagenet
+    n_class = 1000  # we just use imagenet
 
     X = tf.placeholder(tf.int32, [n_batch, args.n_px * args.n_px])
     Y = tf.placeholder(tf.float32, [n_batch, n_class])
