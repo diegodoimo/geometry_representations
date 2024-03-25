@@ -128,6 +128,11 @@ python src/download_igpt.py --model s --ckpt 1000000 --dataset imagenet --downlo
 ```
 
 #### b. Compute the nearest neighbor matrix. 
+With the following command, you will extract the 24 hidden representations of iGPT-small analyzed in the paper. 
+
+In a V100 GPU with 32GB of V-RAM, extracting the representations of 90k examples takes around one hour and requires 32GB of V-RAM. You can decrease the memory requirement by decreasing the batch size. After the representations have been extracted, the computation of the 24 distance matrices takes another 30 minutes (for 90k examples). 
+
+The representations are stored in RAM during the process. Depending on your memory budget, you may need to extract smaller subsets of layers. 
 
 ```
 python  src/run.py 
