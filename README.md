@@ -5,7 +5,7 @@ This work has been included in the [NeurIPS 2023 proceedings](https://papers.nip
 
 
 ## Platform
-- Ubuntu 22.04
+We performed the experiments on a Linux cluster with Intel Xeon Gold 6226 processors and V100 GPUs with 32GB of VRAM. We ran the code in Ubuntu 22.04.
 
 
 ## Premise
