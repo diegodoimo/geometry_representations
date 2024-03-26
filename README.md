@@ -128,8 +128,18 @@ We added the scikit-learn package to the environment of https://github.com/opena
 #### a. Download the i-gpt pretrained models.
 You can download the iGPT-small model and the ImageNet dataset (training, validation, test sets) with:
 ```
-python src/download_igpt.py --model s --ckpt 1000000 --dataset imagenet --download_dir igpt_models
+python src/download_igpt.py
+--model s
+--ckpt 1000000
+--dataset imagenet
+--download_dir igpt_models
 ```
+
+*--model 's'*  means that we download the small version of iGPT; <br>
+*--ckpt 1000000* is the training checkpoint to download. 1 000 000 means fully trained model; <br>
+*--dataset imagenet* means that we download the ImageNet dataset; <br>
+*--download_dir igpt_models*  is the directory where the pre-trained model and ImageNet dataset are stored. <br>
+
 The disk memory occupied by models and datasets is as follows: <br>
 iGPT-small: 894MB; <br>
 iGPT-medium: 5.2GB; <br>
@@ -147,19 +157,19 @@ The representations are stored in RAM during the process. Depending on your memo
 
 ```
 python  src/run.py 
---data_dir igpt_models \
---ckpt_dir igpt_models \
---model "s" \
---results_dir "./results" \
---nimg_cat 300 \
---n_sub_batch 8 \
+--data_dir igpt_models 
+--ckpt_dir igpt_models 
+--model "s" 
+--results_dir "./results" 
+--nimg_cat 300 
+--n_sub_batch 8 
 ```
 
 *--ckpt_path* is the directory where you stored the model checkpoints downloaded in a.; <br>
 *--model* 's' means that you are analyzing the small model; <br>
 *--data_dir* is the directory where you stored the ImageNet dataset as downloaded in a.; <br>
 *--results_dir* is the directory where the representations/distance matrices are saved; <br>
-*--nimg_cat* is number of images per class analyzed (300 in the paper); <br>
+*--nimg_cat* is the number of images per class analyzed (300 in the paper); <br>
 *--n_sub_batch*  is the batch size. <br>
 
 In the run.py, we extract only the 300 classes from the ImageNet **TRAINING SET** analyzed in the paper. <br>
@@ -173,13 +183,13 @@ If you just want to extract the hidden layer representations, add the *--activat
 
 ```
 python  src/run.py 
---activations \
---data_dir igpt_models \
---ckpt_dir igpt_models \
---model "s" \
---results_dir "./results" \
---nimg_cat 300 \
---n_sub_batch 8 \
+--activations 
+--data_dir igpt_models 
+--ckpt_dir igpt_models 
+--model "s" 
+--results_dir "./results" 
+--nimg_cat 300 
+--n_sub_batch 8 
 ```
 
-With this setup the distance matrices are not computed. 
+With this setup, the distance matrices are not computed. 
